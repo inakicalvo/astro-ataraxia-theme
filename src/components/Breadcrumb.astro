@@ -1,0 +1,91 @@
+---
+export interface BreadcrumbItem {
+	label: string;
+	href: string;
+}
+
+interface Props {
+	items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	'itemListElement': items.map((item, index) => ({
+		'@type': 'ListItem',
+		'position': index + 1,
+		'name': item.label,
+		'item': new URL(item.href, Astro.site).href
+	}))
+};
+---
+
+<nav aria-label="Breadcrumb">
+	<ol class="breadcrumb">
+		{items.map((item, index) => (
+			<li>
+				{index < items.length - 1 ? (
+					<a href={item.href}>{item.label}</a>
+				) : (
+					<span aria-current="page">{item.label}</span>
+				)}
+			</li>
+		))}
+	</ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<style>
+	nav {
+		margin-bottom: 2rem;
+	}
+	
+	.breadcrumb {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		font-size: 0.875rem;
+		color: rgb(var(--gray));
+	}
+	
+	.breadcrumb li {
+		display: flex;
+		align-items: center;
+	}
+	
+	.breadcrumb li:not(:last-child)::after {
+		content: '/';
+		margin: 0 0.5rem;
+		color: rgb(var(--gray));
+	}
+	
+	.breadcrumb a {
+		color: var(--accent);
+		text-decoration: none;
+		transition: opacity 0.2s ease;
+	}
+	
+	.breadcrumb a:hover {
+		opacity: 0.8;
+		text-decoration: underline;
+	}
+	
+	.breadcrumb span[aria-current="page"] {
+		color: rgb(var(--gray-dark));
+		font-weight: 500;
+	}
+	
+	@media (max-width: 720px) {
+		.breadcrumb {
+			font-size: 0.8rem;
+		}
+		
+		.breadcrumb li:not(:last-child)::after {
+			margin: 0 0.375rem;
+		}
+	}
+</style>

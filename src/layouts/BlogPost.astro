@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import TagList from '../components/TagList.astro';
+import { SITE_AUTHOR } from '../consts';
+import { Icon } from 'astro-icon/components';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			.date svg {
+				vertical-align: text-top;
+				margin-right: 0.1rem;
+				color: var(--accent);
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main id="main">
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt={heroImageAlt || ''} />}
+				</div>
+				<div class="prose">
+					<Breadcrumb items={[
+						{ label: 'Home', href: '/' },
+						{ label: 'Blog', href: '/blog' },
+						{ label: title, href: Astro.url.pathname }
+					]} />
+					<div class="title">
+						<div class="date">
+							<Icon name="mdi:calendar" width={20} height={20} aria-hidden="true" />
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<Icon name="mdi:calendar" width={20} height={20} aria-hidden="true" />
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							} - <Icon name="mdi:account" width={20} height={20} aria-hidden="true" />{SITE_AUTHOR}
+						</div>
+						<h1>{title}</h1>
+					</div>
+					<slot />
+					<hr aria-hidden="true" />
+					<TagList tags={tags} showLabel={true} />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

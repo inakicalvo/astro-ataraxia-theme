@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<h1>👋 Hello, human!</h1>
+			<p>My name is <strong><a href="https://github.com/inakicalvo" target="_blank" rel="noopener noreferrer">Iñaki Calvo</a></strong> and I'm a techie with a Bachelor's Degree in Philosophy; that's why I named this Astro theme "Ataraxia" after the philosophical concept — learn more on <a href="https://en.wikipedia.org/wiki/Ataraxia" target="_blank" rel="noopener noreferrer">Wikipedia</a>.</p>
+			<p>
+				<strong>Ataraxia</strong> is an accessible, lightweight <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a> theme designed to showcase your writing. Built on the Official Astro Blog Starter, it includes:
+			</p>
+			<ul>
+				<li>✅ <strong>Astro v5</strong> - Built with the latest Astro features</li>
+				<li>✅ <strong>Dark Mode</strong> - Toggle between light and dark themes</li>
+				<li>✅ <strong>Tag System</strong> - Organize posts by tags with dedicated tag pages</li>
+				<li>✅ <strong>Responsive Design</strong> - Mobile-first with hamburger navigation</li>
+				<li>✅ <strong>Content Collections</strong> - Type-safe blog posts with Zod validation</li>
+				<li>✅ <strong>SEO Optimized</strong> - Canonical URLs, OpenGraph data, and sitemap</li>
+				<li>✅ <strong>RSS Feed</strong> - Auto-generated RSS feed for subscribers</li>
+				<li>✅ <strong>MDX Support</strong> - Enhanced markdown with component support</li>
+				<li>✅ <strong>Breadcrumb Navigation</strong> - Clear navigation paths</li>
+				<li>✅ <strong>Performance</strong> - Optimized images with Sharp</li>
+				<li>✅ <strong>Minimal Styling</strong> - Clean design based on Astro Starter Kit: Blog</li>
+				<li>✅ <strong>Atkinson Hyperlegible Fonts</strong> - Variable fonts optimized for readability</li>
+				<li>✅ <strong>Accessible</strong> - WCAG 2.2 AA compliant with keyboard navigation and screen reader support</li>
+			</ul>
+
+			<p>I started building this theme for my personal blog but it's now open source. Customize it, make it yours, and start sharing your ideas with the world. Happy blogging! ✨</p>
+			</main>
+		<Footer />
+	</body>
+</html>

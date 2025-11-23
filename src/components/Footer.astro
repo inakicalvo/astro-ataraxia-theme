@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SITE_AUTHOR } from '../consts';
+const today = new Date();
+---
+
+<footer>
+	&copy; {today.getFullYear()} {SITE_AUTHOR}. All rights reserved.
+	<div class="social-links">
+		   <a href="https://m.webtoo.ls/@astro" target="_blank" rel="noopener noreferrer" aria-label="Follow Astro on Mastodon">
+			   <Icon name="mdi:mastodon" width={36} height={36} aria-hidden="true" />
+		   </a>
+		   <a href="https://github.com/withastro/astro" target="_blank" rel="noopener noreferrer" aria-label="Go to Astro's GitHub repo">
+			   <Icon name="simple-icons:github" width={36} height={36} aria-hidden="true" />
+		   </a>
+		   <a href="https://www.youtube.com/@astro" target="_blank" rel="noopener noreferrer" aria-label="Visit Astro on YouTube">
+			   <Icon name="mdi:youtube" width={36} height={36} aria-hidden="true" />
+		   </a>
+		   <a href="https://www.linkedin.com/company/astro" target="_blank" rel="noopener noreferrer" aria-label="Connect with Astro on LinkedIn">
+			   <Icon name="mdi:linkedin" width={36} height={36} aria-hidden="true" />
+		   </a>
+		   <a href="mailto:hello@astro.build" target="_blank" rel="noopener noreferrer" aria-label="Email Astro">
+			   <Icon name="mdi:email" width={36} height={36} aria-hidden="true" />
+		   </a>
+	</div>
+</footer>
+<style>
+	footer {
+		padding: 2em 1em 6em 1em;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		color: rgb(var(--gray));
+		text-align: center;
+	}
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+		margin-top: 1em;
+	}
+	.social-links a {
+		text-decoration: none;
+		color: rgb(var(--gray));
+	}
+	.social-links a:hover {
+		color: rgb(var(--gray-dark));
+	}
+</style>

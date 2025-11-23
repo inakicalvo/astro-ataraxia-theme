@@ -1,0 +1,253 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import TagList from '../../components/TagList.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { slugify } from '../../utils/slugify';
+
+export async function getStaticPaths() {
+	const allPosts = await getCollection('blog');
+	
+	// Get all unique tags
+	const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+	
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts
+			.filter((post) => post.data.tags.includes(tag))
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		
+		return {
+			params: { tag: slugify(tag) },
+			props: { posts: filteredPosts, tagName: tag },
+		};
+	});
+}
+
+const { tag } = Astro.params;
+const { posts, tagName } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Tag: ${tagName} - ${SITE_TITLE}`} description={`Posts tagged with "${tagName}"`} />
+		<style>
+			main {
+				width: 720px;
+			}
+			.tag-header {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			.tag-header h1 {
+				margin-bottom: 0.5rem;
+				font-size: 3rem;
+			}
+			.tag-header .subtitle {
+				color: var(--footer-text);
+				font-size: 1.2rem;
+				margin: 0;
+			}
+			.tag-badge {
+				display: inline-block;
+				padding: 0.5rem 1.5rem;
+				background: var(--accent);
+				color: white;
+				border-radius: 9999px;
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin: 1rem 0;
+			}
+			:global([data-theme="dark"]) .tag-badge {
+				color: var(--accent-dark);
+			}
+			ul {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				width: 100%;
+				background: var(--header-bg);
+				border-radius: 16px;
+				overflow: hidden;
+				box-shadow: 0 2px 12px rgba(var(--black), 8%);
+				transition: all 0.3s ease;
+			}
+			ul li:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 25px rgba(var(--black), 15%);
+			}
+			ul li * {
+				text-decoration: none;
+				transition: 0.2s ease;
+			}
+			ul li img {
+				margin-bottom: 0;
+				border-radius: 0;
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+			ul li a {
+				display: block;
+				color: inherit;
+			}
+			.post-content {
+				padding: 2rem;
+			}
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				margin-bottom: 1rem;
+				font-size: 1rem;
+				color: var(--footer-text);
+				font-weight: 500;
+			}
+			.meta-item {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.meta-item svg {
+				color: var(--accent);
+				flex-shrink: 0;
+			}
+			.title {
+				margin: 0;
+				color: var(--heading-color);
+				line-height: 1.3;
+				font-size: 1.875rem;
+				font-weight: 700;
+				margin-bottom: 1rem;
+			}
+			.description {
+				margin: 0;
+				color: var(--text-color);
+				line-height: 1.6;
+				font-size: 1.125rem;
+				opacity: 0.9;
+			}
+			ul li a:hover .title {
+				color: var(--accent);
+			}
+			ul li a:hover .description {
+				opacity: 1;
+			}
+			ul a:hover img {
+				box-shadow: var(--box-shadow);
+			}
+			.back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: 500;
+				margin-bottom: 2rem;
+				transition: all 0.2s ease;
+			}
+			.back-link:hover {
+				transform: translateX(-4px);
+			}
+			@media (max-width: 720px) {
+				.tag-header h1 {
+					font-size: 2rem;
+				}
+				.tag-header .subtitle {
+					font-size: 1rem;
+				}
+				.tag-badge {
+					font-size: 1rem;
+					padding: 0.375rem 1rem;
+				}
+				ul {
+					gap: 1.5rem;
+				}
+				.post-content {
+					padding: 1.5rem;
+				}
+				.title {
+					font-size: 1.5rem;
+					margin-bottom: 0.75rem;
+				}
+				.description {
+					font-size: 1rem;
+				}
+				.post-meta {
+					font-size: 0.9rem;
+					margin-bottom: 0.75rem;
+					gap: 1rem;
+				}
+				.meta-item {
+					gap: 0.375rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<section>
+				<Breadcrumb items={[
+					{ label: 'Home', href: '/' },
+					{ label: 'Blog', href: '/blog' },
+					{ label: 'Tags', href: '/tags' },
+					{ label: tagName, href: `/tags/${tag}` }
+				]} />
+				<a href="/blog" class="back-link">
+					<Icon name="mdi:arrow-left" width={20} height={20} aria-hidden="true" />
+					Back to Blog
+				</a>
+				<div class="tag-header">
+					<h1>Posts tagged with</h1>
+					<div class="tag-badge">{tagName}</div>
+					<p class="subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} found</p>
+				</div>
+				<ul>
+					{
+						   posts.map((post, idx) => (
+							   <li>
+									  <a href={`/blog/${post.id}/`} aria-label={post.data.title}>
+									   {post.data.heroImage && (
+										   <Image width={720} height={360} src={post.data.heroImage} alt={post.data.heroImageAlt || ''} 
+											   loading={idx === 0 ? 'eager' : 'lazy'} />
+									   )}
+									   <div class="post-content">
+										<div class="post-meta">
+											<div class="meta-item">
+												<Icon name="mdi:calendar" width={16} height={16} aria-hidden="true" />
+												<FormattedDate date={post.data.pubDate} />
+											</div>
+											<div class="meta-item">
+												<Icon name="mdi:account" width={16} height={16} aria-hidden="true" />
+												<span class="author">Your name here</span>
+											</div>
+										</div>
+										<hr aria-hidden="true" />
+										<h2 class="title">{post.data.title}</h2>
+										{post.data.description && (
+											<p class="description">{post.data.description}</p>
+										)}
+										<TagList tags={post.data.tags} limit={3} />
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

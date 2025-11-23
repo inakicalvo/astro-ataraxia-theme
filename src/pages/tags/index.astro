@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { slugify } from '../../utils/slugify';
+
+const allPosts = await getCollection('blog');
+
+// Count posts for each tag
+const tagCounts = allPosts.reduce((acc, post) => {
+	post.data.tags.forEach((tag) => {
+		acc[tag] = (acc[tag] || 0) + 1;
+	});
+	return acc;
+}, {} as Record<string, number>);
+
+// Sort tags by post count (descending) then alphabetically
+const sortedTags = Object.entries(tagCounts)
+	.sort(([a, countA], [b, countB]) => {
+		const numA = countA as number;
+		const numB = countB as number;
+		if (numB !== numA) return numB - numA;
+		return a.localeCompare(b);
+	});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`All Tags - ${SITE_TITLE}`} description="Browse all blog tags" />
+		<style>
+			main {
+				width: 720px;
+			}
+			.tags-header {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			.tags-header h1 {
+				margin-bottom: 0.5rem;
+				font-size: 3rem;
+			}
+			.tags-header .subtitle {
+				color: var(--footer-text);
+				font-size: 1.2rem;
+				margin: 0;
+			}
+			.back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: 500;
+				margin-bottom: 2rem;
+				transition: all 0.2s ease;
+			}
+			.back-link:hover {
+				transform: translateX(-4px);
+			}
+			.tags-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 1.5rem;
+				margin-top: 2rem;
+			}
+			.tag-card {
+				background: var(--header-bg);
+				border-radius: 16px;
+				padding: 2rem;
+				box-shadow: 0 2px 12px rgba(var(--black), 8%);
+				transition: all 0.3s ease;
+				text-decoration: none;
+				color: inherit;
+				border: 2px solid transparent;
+			}
+			.tag-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 25px rgba(var(--black), 15%);
+				border-color: var(--accent);
+			}
+			.tag-name {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: var(--accent);
+				margin-bottom: 0.5rem;
+				display: block;
+			}
+			.tag-count {
+				color: var(--footer-text);
+				font-size: 1rem;
+				font-weight: 500;
+			}
+			.tag-description {
+				margin-top: 1rem;
+				color: var(--text-color);
+				font-size: 0.9rem;
+				opacity: 0.8;
+			}
+			@media (max-width: 720px) {
+				.tags-header h1 {
+					font-size: 2rem;
+				}
+				.tags-header .subtitle {
+					font-size: 1rem;
+				}
+				.tags-grid {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+				}
+				.tag-card {
+					padding: 1.5rem;
+				}
+				.tag-name {
+					font-size: 1.25rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<section>
+				<a href="/blog" class="back-link">
+					<Icon name="mdi:arrow-left" width={20} height={20} aria-hidden="true" />
+					Back to Blog
+				</a>
+				<div class="tags-header">
+					<h1>All Tags</h1>
+					<p class="subtitle">Browse posts by topic</p>
+				</div>
+				<div class="tags-grid">
+					{
+						sortedTags.map(([tag, count]) => (
+							<a href={`/tags/${slugify(tag)}/`} class="tag-card">
+								<span class="tag-name">{tag}</span>
+								<div class="tag-count">
+									{count} {count === 1 ? 'post' : 'posts'}
+								</div>
+								<div class="tag-description">
+									Click to view all posts tagged with "{tag}"
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
