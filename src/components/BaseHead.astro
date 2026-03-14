@@ -4,6 +4,7 @@
 import '../styles/global.css';
 import FallbackImage from '../assets/Greek_philosopher_busts.jpg';
 import { SITE_TITLE } from '../consts';
+import { Font } from 'astro:assets';
 
 interface Props {
 	title: string;
@@ -29,8 +30,9 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link rel="preload" href="/fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+<!-- Fonts -->
+<Font cssVariable="--font-atkinson" preload />
+<Font cssVariable="--font-atkinson-mono" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
