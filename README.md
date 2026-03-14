@@ -4,7 +4,7 @@ A clean, accessible, and modern blog theme for Astro v5, inspired by the philoso
 
 ## ✨ Features
 
-- ✅ **Astro v5** - Built with the latest Astro features
+- ✅ **Astro v6** - Built with the latest Astro features
 - ✅ **Dark Mode** - Toggle between light and dark themes with smooth transitions
 - ✅ **Accessible** - WCAG 2.2 AA compliant with keyboard navigation and screen reader support
 - ✅ **Atkinson Hyperlegible Fonts** - Variable fonts optimized for readability
