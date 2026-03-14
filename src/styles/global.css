@@ -46,29 +46,8 @@
 	--bg-color: #111111;
 	--code-bg: rgb(var(--gray-light));
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf") format("truetype");
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/AtkinsonHyperlegibleNext-Italic-VariableFont_wght.ttf") format("truetype");
-	font-weight: 100 900;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Atkinson Mono";
-	src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf") format("truetype");
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
-}
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: var(--font-atkinson), sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -157,7 +136,7 @@ code {
 	background-color: var(--code-bg);
 	border-radius: 2px;
 	color: var(--text-color);
-	font-family: "Atkinson Mono", monospace;
+	font-family: var(--font-atkinson-mono), monospace;
 }
 pre {
 	padding: 1.5em;
@@ -165,7 +144,7 @@ pre {
 }
 pre > code {
 	all: unset;
-	font-family: "Atkinson Mono", monospace;
+	font-family: var(--font-atkinson-mono), monospace;
 }
 blockquote {
 	border-left: 4px solid var(--accent);
