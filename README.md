@@ -1,10 +1,10 @@
 # Ataraxia - Astro Blog Theme
 
-A clean, accessible, and modern blog theme for Astro v6, inspired by the philosophical concept of tranquility and peace of mind.
+A clean, accessible, and modern blog theme for Astro v7, inspired by the philosophical concept of tranquility and peace of mind.
 
 ## ✨ Features
 
-- ✅ **Astro v6** - Built with the latest Astro features
+- ✅ **Astro v7** - Built with the latest Astro features
 - ✅ **Dark Mode** - Toggle between light and dark themes with smooth transitions
 - ✅ **Accessible** - WCAG 2.2 AA compliant with keyboard navigation and screen reader support
 - ✅ **Atkinson Hyperlegible Fonts** - Variable fonts optimized for readability
@@ -162,7 +162,7 @@ Add or remove links in `src/components/Header.astro`
 
 ## 📦 Dependencies
 
-- **Astro** v6.0.4 - Static site generator
+- **Astro** - Static site generator
 - **@astrojs/mdx** - MDX support
 - **@astrojs/rss** - RSS feed generation
 - **@astrojs/sitemap** - Sitemap generation
