@@ -6,13 +6,11 @@ import Header from '../../components/Header.astro';
 import Pagination from '../../components/Pagination.astro';
 import PostCard from '../../components/PostCard.astro';
 import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-import { getPublishedPosts } from '../../utils/posts';
+import { getSortedPosts } from '../../utils/posts';
 import '../../styles/pages/blog-index.css';
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const posts = (await getPublishedPosts()).sort(
-		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-	);
+	const posts = await getSortedPosts();
 	return paginate(posts, { pageSize: POSTS_PER_PAGE });
 }) satisfies GetStaticPaths;
 

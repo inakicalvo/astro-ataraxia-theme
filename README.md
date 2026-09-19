@@ -22,8 +22,7 @@ npm create astro@latest -- --template inakicalvo/astro-ataraxia-theme
 - **No Tailwind.** Plain CSS custom properties — customize everything from a single file, no utility-class soup.
 - **WCAG 2.2 AA**, built around Atkinson Hyperlegible, the typeface designed by the Braille Institute for
   low-vision readers.
-- **The Bear Blog look**, without Bear Blog's hosting limits — it's just an Astro repo you own and deploy
-  anywhere.
+- **Made for reading**. Generous spacing, careful typography, and no visual noise around your content.
 
 ## ✨ Features
 
