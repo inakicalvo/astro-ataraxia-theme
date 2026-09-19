@@ -1,0 +1,15 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	icon: string;
+	class?: string;
+}
+
+const { icon, class: className } = Astro.props;
+---
+
+<span class:list={['meta-item', className]}>
+	<Icon name={icon} width={16} height={16} aria-hidden="true" />
+	<slot />
+</span>

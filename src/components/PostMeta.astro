@@ -1,0 +1,14 @@
+---
+import '../styles/components/post-meta.css';
+
+interface Props {
+	size?: 'sm' | 'lg';
+	centered?: boolean;
+}
+
+const { size = 'sm', centered = false } = Astro.props;
+---
+
+<div class:list={['post-meta', size === 'lg' && 'post-meta--lg', centered && 'post-meta--centered']}>
+	<slot />
+</div>

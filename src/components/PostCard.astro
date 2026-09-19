@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { Icon } from 'astro-icon/components';
 import { SITE_AUTHOR } from '../consts';
 import FormattedDate from './FormattedDate.astro';
+import MetaItem from './MetaItem.astro';
+import PostMeta from './PostMeta.astro';
 import TagList from './TagList.astro';
 import '../styles/components/post-card.css';
 
@@ -30,16 +31,14 @@ const isDraft = import.meta.env.DEV && post.data.draft;
 			/>
 		)}
 		<div class="post-card-body">
-			<div class="post-meta">
-				<div class="meta-item">
-					<Icon name="mdi:calendar" width={16} height={16} aria-hidden="true" />
+			<PostMeta>
+				<MetaItem icon="mdi:calendar">
 					<FormattedDate date={post.data.pubDate} />
-				</div>
-				<div class="meta-item">
-					<Icon name="mdi:account" width={16} height={16} aria-hidden="true" />
-					<span class="author">{SITE_AUTHOR}</span>
-				</div>
-			</div>
+				</MetaItem>
+				<MetaItem icon="mdi:account">
+					{SITE_AUTHOR}
+				</MetaItem>
+			</PostMeta>
 			<hr aria-hidden="true" />
 			<h2 class="post-card-title">
 				{post.data.title}
