@@ -4,3 +4,4 @@
 export const SITE_TITLE = 'Ataraxia Astro Theme';
 export const SITE_DESCRIPTION = 'Ataraxia is a minimal, accessible Astro v7 theme for building fast, content-focused websites.';
 export const SITE_AUTHOR = 'Your Name Here';
+export const POSTS_PER_PAGE = 6;

@@ -1,0 +1,53 @@
+---
+import type { Page } from 'astro';
+import { Icon } from 'astro-icon/components';
+import '../styles/components/pagination.css';
+
+interface Props {
+	page: Page<unknown>;
+}
+
+const { page } = Astro.props;
+const pageUrl = (n: number) => (n === 1 ? '/blog/' : `/blog/${n}/`);
+const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+---
+
+{
+	page.lastPage > 1 && (
+		<nav class="pagination" aria-label="Pagination">
+			{page.url.prev ? (
+				<a class="pagination-link" href={page.url.prev} rel="prev">
+					<Icon name="mdi:arrow-left" width={18} height={18} aria-hidden="true" /> Previous
+				</a>
+			) : (
+				<span class="pagination-link pagination-disabled" aria-hidden="true">
+					<Icon name="mdi:arrow-left" width={18} height={18} aria-hidden="true" /> Previous
+				</span>
+			)}
+
+			<ol class="pagination-pages">
+				{pageNumbers.map((n) => (
+					<li>
+						<a
+							href={pageUrl(n)}
+							class:list={['pagination-page', { 'pagination-current': n === page.currentPage }]}
+							aria-current={n === page.currentPage ? 'page' : undefined}
+						>
+							{n}
+						</a>
+					</li>
+				))}
+			</ol>
+
+			{page.url.next ? (
+				<a class="pagination-link" href={page.url.next} rel="next">
+					Next <Icon name="mdi:arrow-right" width={18} height={18} aria-hidden="true" />
+				</a>
+			) : (
+				<span class="pagination-link pagination-disabled" aria-hidden="true">
+					Next <Icon name="mdi:arrow-right" width={18} height={18} aria-hidden="true" />
+				</span>
+			)}
+		</nav>
+	)
+}
