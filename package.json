@@ -17,5 +17,9 @@
     "astro": "^7.3.3",
     "astro-icon": "^1.1.5",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }
