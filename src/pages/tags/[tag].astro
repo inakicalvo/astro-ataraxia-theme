@@ -8,7 +8,7 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import TagList from '../../components/TagList.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_AUTHOR } from '../../consts';
 import { slugify } from '../../utils/slugify';
 
 export async function getStaticPaths() {
@@ -231,7 +231,7 @@ const { posts, tagName } = Astro.props;
 											</div>
 											<div class="meta-item">
 												<Icon name="mdi:account" width={16} height={16} aria-hidden="true" />
-												<span class="author">Your name here</span>
+												<span class="author">{SITE_AUTHOR}</span>
 											</div>
 										</div>
 										<hr aria-hidden="true" />
