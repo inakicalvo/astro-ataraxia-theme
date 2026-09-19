@@ -1,0 +1,8 @@
+.header-link {
+	display: inline-block;
+	text-decoration: none;
+}
+.header-link.active {
+	font-weight: bolder;
+	text-decoration: underline;
+}

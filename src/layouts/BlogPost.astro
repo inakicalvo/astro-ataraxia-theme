@@ -9,6 +9,7 @@ import Header from '../components/Header.astro';
 import TagList from '../components/TagList.astro';
 import { SITE_AUTHOR } from '../consts';
 import { Icon } from 'astro-icon/components';
+import '../styles/pages/blog-post.css';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -18,55 +19,11 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			.date svg {
-				vertical-align: middle;
-				margin-right: 0.2rem;
-				color: var(--accent);
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main id="main">
+		<main id="main" class="post-page">
 			<article>
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt={heroImageAlt || ''} />}
@@ -77,8 +34,8 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags 
 						{ label: 'Blog', href: '/blog' },
 						{ label: title, href: Astro.url.pathname }
 					]} />
-					<div class="title">
-						<div class="date">
+					<div class="post-header">
+						<div class="post-date">
 							<Icon name="mdi:calendar" width={20} height={20} aria-hidden="true" />
 							<FormattedDate date={pubDate} />
 							{

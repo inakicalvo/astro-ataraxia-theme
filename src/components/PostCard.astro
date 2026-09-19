@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import { SITE_AUTHOR } from '../consts';
+import FormattedDate from './FormattedDate.astro';
+import TagList from './TagList.astro';
+import '../styles/components/post-card.css';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+	loading?: 'eager' | 'lazy';
+	tagLimit?: number;
+}
+
+const { post, loading = 'lazy', tagLimit } = Astro.props;
+---
+
+<li class="post-card">
+	<!-- The tag list sits outside the link: nesting <a> inside <a> is invalid HTML. -->
+	<a class="post-card-link" href={`/blog/${post.id}/`} aria-label={post.data.title}>
+		{post.data.heroImage && (
+			<Image
+				width={720}
+				height={360}
+				src={post.data.heroImage}
+				alt={post.data.heroImageAlt || ''}
+				loading={loading}
+			/>
+		)}
+		<div class="post-card-body">
+			<div class="post-meta">
+				<div class="meta-item">
+					<Icon name="mdi:calendar" width={16} height={16} aria-hidden="true" />
+					<FormattedDate date={post.data.pubDate} />
+				</div>
+				<div class="meta-item">
+					<Icon name="mdi:account" width={16} height={16} aria-hidden="true" />
+					<span class="author">{SITE_AUTHOR}</span>
+				</div>
+			</div>
+			<hr aria-hidden="true" />
+			<h2 class="post-card-title">{post.data.title}</h2>
+			{post.data.description && (
+				<p class="post-card-description">{post.data.description}</p>
+			)}
+			<hr aria-hidden="true" />
+		</div>
+	</a>
+	<div class="post-card-tags">
+		<TagList tags={post.data.tags} limit={tagLimit} />
+	</div>
+</li>

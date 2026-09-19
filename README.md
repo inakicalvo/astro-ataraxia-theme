@@ -50,7 +50,9 @@ A clean, accessible, and modern blog theme for Astro v7, inspired by the philoso
 │   │       ├── [tag].astro      # Tag filter pages
 │   │       └── index.astro      # All tags page
 │   ├── styles/
-│   │   └── global.css       # Global styles and CSS variables
+│   │   ├── global.css       # Global styles and CSS variables
+│   │   ├── components/      # One stylesheet per component (header.css, post-card.css, …)
+│   │   └── pages/           # One stylesheet per page/layout (blog-post.css, tag.css, …)
 │   ├── utils/
 │   │   └── slugify.ts       # URL slug generation
 │   ├── consts.ts            # Site configuration
@@ -151,6 +153,10 @@ Edit CSS variables in `src/styles/global.css`:
 
 - Light theme: `:root` selector
 - Dark theme: `[data-theme="dark"]` selector
+
+### Component and page styles
+
+Components and pages carry no `<style>` blocks. Each one imports its own stylesheet from `src/styles/components/` or `src/styles/pages/` (e.g. `Header.astro` imports `src/styles/components/header.css`). Because these files are plain global CSS, selectors are class-based (`.site-header`, `.post-card`, …) rather than bare element selectors.
 
 ### Fonts
 

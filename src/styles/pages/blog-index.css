@@ -1,0 +1,26 @@
+.blog-header {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+.blog-header h1 {
+	margin-bottom: 0.5rem;
+	font-size: 3rem;
+}
+.blog-header .subtitle {
+	color: var(--footer-text);
+	font-size: 1.2rem;
+	margin: 0;
+}
+.tags-link {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+@media (max-width: 720px) {
+	.blog-header h1 {
+		font-size: 2rem;
+	}
+	.blog-header .subtitle {
+		font-size: 1rem;
+	}
+}
