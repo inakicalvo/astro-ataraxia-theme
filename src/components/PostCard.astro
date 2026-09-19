@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { SITE_AUTHOR } from '../consts';
+import { calculateReadingTime } from '../utils/readingTime';
 import FormattedDate from './FormattedDate.astro';
 import MetaItem from './MetaItem.astro';
 import PostMeta from './PostMeta.astro';
@@ -16,6 +17,7 @@ interface Props {
 
 const { post, loading = 'lazy', tagLimit } = Astro.props;
 const isDraft = import.meta.env.DEV && post.data.draft;
+const readingTime = calculateReadingTime(post.body ?? '');
 ---
 
 <li class="post-card">
@@ -37,6 +39,9 @@ const isDraft = import.meta.env.DEV && post.data.draft;
 				</MetaItem>
 				<MetaItem icon="mdi:account">
 					{SITE_AUTHOR}
+				</MetaItem>
+				<MetaItem icon="mdi:clock-outline">
+					{readingTime} min read
 				</MetaItem>
 			</PostMeta>
 			<hr aria-hidden="true" />
