@@ -43,15 +43,16 @@ main.post-page {
 [data-theme="dark"] .post-draft-badge {
 	background: #b5661f;
 }
-.post-date {
-	margin-bottom: 0.5em;
-	color: rgb(var(--gray));
+.post-header .post-meta {
+	margin-bottom: 1.25em;
 }
-.last-updated-on {
-	font-style: italic;
-}
-.post-date svg {
-	vertical-align: middle;
-	margin-right: 0.2rem;
-	color: var(--accent);
+@media (max-width: 720px) {
+	.post-header .post-meta {
+		margin-bottom: 0.75em;
+		font-size: 0.875rem;
+	}
+	.post-header .post-meta.post-meta--lg .meta-item svg {
+		width: 15px;
+		height: 15px;
+	}
 }

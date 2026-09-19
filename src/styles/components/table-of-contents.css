@@ -1,0 +1,40 @@
+.toc {
+	margin: 1.5rem 0;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+}
+
+.toc-summary {
+	cursor: pointer;
+	font-weight: 700;
+	color: var(--heading-color);
+}
+
+.toc-summary::marker {
+	color: var(--accent);
+}
+
+.toc-list {
+	margin: 0.75rem 0 0;
+	padding-left: 1.25rem;
+}
+
+.toc-item {
+	margin: 0.35rem 0;
+}
+
+.toc-item a {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
+.toc-item a:hover {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+.toc-depth-3 {
+	margin-left: 1rem;
+	font-size: 0.9375rem;
+}
