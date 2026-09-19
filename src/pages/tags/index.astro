@@ -31,7 +31,7 @@ const sortedTags = Object.entries(tagCounts)
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`All Tags - ${SITE_TITLE}`} description="Browse all blog tags" />
+		<BaseHead title={`All Tags - ${SITE_TITLE}`} description={`Browse all ${sortedTags.length} topics on ${SITE_TITLE}`} />
 	</head>
 	<body>
 		<Header />
