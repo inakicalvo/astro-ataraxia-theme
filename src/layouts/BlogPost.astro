@@ -13,7 +13,7 @@ import '../styles/pages/blog-post.css';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags, draft } = Astro.props;
 ---
 
 <html lang="en">
@@ -48,6 +48,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags 
 							} - <Icon name="mdi:account" width={20} height={20} aria-hidden="true" />{SITE_AUTHOR}
 						</div>
 						<h1>{title}</h1>
+						{import.meta.env.DEV && draft && <span class="post-draft-badge">Draft</span>}
 					</div>
 					<slot />
 					<hr aria-hidden="true" />

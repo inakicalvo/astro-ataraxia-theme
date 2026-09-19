@@ -28,6 +28,21 @@ main.post-page {
 .post-header h1 {
 	margin: 0 0 0.5em 0;
 }
+.post-draft-badge {
+	display: inline-block;
+	margin-top: 0.5rem;
+	padding: 0.2rem 0.75rem;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: #fff;
+	background: #d9822b;
+	border-radius: 9999px;
+}
+[data-theme="dark"] .post-draft-badge {
+	background: #b5661f;
+}
 .post-date {
 	margin-bottom: 0.5em;
 	color: rgb(var(--gray));

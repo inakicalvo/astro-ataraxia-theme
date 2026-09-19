@@ -1,14 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE_TITLE } from '../../consts';
 import { slugify } from '../../utils/slugify';
+import { getPublishedPosts } from '../../utils/posts';
 import '../../styles/pages/tags-index.css';
 
-const allPosts = await getCollection('blog');
+const allPosts = await getPublishedPosts();
 
 // Count posts for each tag
 const tagCounts = allPosts.reduce((acc, post) => {

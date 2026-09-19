@@ -74,6 +74,22 @@
 	font-size: 1.125rem;
 	opacity: 0.9;
 }
+.post-card-draft-badge {
+	display: inline-block;
+	margin-left: 0.5rem;
+	padding: 0.15rem 0.6rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: #fff;
+	background: #d9822b;
+	border-radius: 9999px;
+	vertical-align: middle;
+}
+[data-theme="dark"] .post-card-draft-badge {
+	background: #b5661f;
+}
 .post-card-link:hover .post-card-title {
 	color: var(--accent);
 }

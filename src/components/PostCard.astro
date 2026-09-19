@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { post, loading = 'lazy', tagLimit } = Astro.props;
+const isDraft = import.meta.env.DEV && post.data.draft;
 ---
 
 <li class="post-card">
@@ -40,7 +41,10 @@ const { post, loading = 'lazy', tagLimit } = Astro.props;
 				</div>
 			</div>
 			<hr aria-hidden="true" />
-			<h2 class="post-card-title">{post.data.title}</h2>
+			<h2 class="post-card-title">
+				{post.data.title}
+				{isDraft && <span class="post-card-draft-badge">Draft</span>}
+			</h2>
 			{post.data.description && (
 				<p class="post-card-description">{post.data.description}</p>
 			)}

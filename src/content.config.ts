@@ -17,6 +17,7 @@ const blog = defineCollection({
 			heroImageAlt: z.string().optional(),
 			// Tags are required, at least one tag must be provided
 			tags: z.array(z.string()).min(1, "At least one tag is required"),
+			draft: z.boolean().optional().default(false),
 		}),
 });
 
