@@ -19,7 +19,7 @@ npm create astro@latest -- --template inakicalvo/astro-ataraxia-theme
 
 ## Why Ataraxia?
 
-- **No Tailwind.** Plain CSS custom properties — customize everything from a single file, no utility-class soup.
+- **No Tailwind.** Plain CSS custom properties — colors live in one file, no utility-class soup.
 - **WCAG 2.2 AA**, built around Atkinson Hyperlegible, the typeface designed by the Braille Institute for
   low-vision readers.
 - **Made for reading**. Generous spacing, careful typography, and no visual noise around your content.
@@ -167,8 +167,10 @@ Add or remove links in `src/components/Header.astro`
 │   │   ├── FormattedDate.astro
 │   │   ├── Header.astro      # Responsive header with navigation
 │   │   ├── HeaderLink.astro
+│   │   ├── MetaItem.astro    # Icon + label pair for post metadata
 │   │   ├── Pagination.astro  # Prev/next + page-number nav
 │   │   ├── PostCard.astro    # Post preview card
+│   │   ├── PostMeta.astro    # Layout wrapper for MetaItem rows
 │   │   ├── TableOfContents.astro # Collapsible per-post TOC
 │   │   ├── TagList.astro     # Display post tags
 │   │   └── ThemeToggle.astro # Dark/light mode toggle
@@ -207,7 +209,9 @@ Add or remove links in `src/components/Header.astro`
 - **@astrojs/mdx** - MDX support
 - **@astrojs/rss** - RSS feed generation
 - **@astrojs/sitemap** - Sitemap generation
+- **astro-icon** - Icon component
 - **@iconify-json/mdi** - Material Design Icons
+- **@iconify-json/simple-icons** - Brand icons (e.g. the footer's GitHub link)
 - **sharp** - Image optimization
 
 ## 🌐 Deployment
