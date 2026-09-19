@@ -1,0 +1,34 @@
+.post-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem 1.25rem;
+	color: rgb(var(--gray));
+}
+
+.post-meta--centered {
+	justify-content: center;
+}
+
+.meta-item {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	white-space: nowrap;
+}
+
+.meta-item svg {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	color: var(--accent);
+}
+
+.post-meta--lg .meta-item svg {
+	width: 18px;
+	height: 18px;
+}
+
+.last-updated-on {
+	font-style: italic;
+}

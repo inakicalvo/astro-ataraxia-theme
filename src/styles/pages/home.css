@@ -1,0 +1,33 @@
+.home-intro {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+.home-intro h1 {
+	margin-bottom: 0.5rem;
+	font-size: 3rem;
+}
+.home-intro p {
+	color: var(--footer-text);
+	font-size: 1.2rem;
+	margin: 0 auto;
+	max-width: 640px;
+}
+.home-recent h2 {
+	margin-bottom: 1.5rem;
+	font-size: 1.75rem;
+}
+.all-posts-link {
+	display: inline-block;
+	margin-top: 2rem;
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+@media (max-width: 720px) {
+	.home-intro h1 {
+		font-size: 2rem;
+	}
+	.home-intro p {
+		font-size: 1rem;
+	}
+}

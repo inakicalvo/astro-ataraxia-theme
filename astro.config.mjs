@@ -7,7 +7,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://astro-ataraxia-theme.netlify.app/',
 	image: {
     responsiveStyles: true,
     layout: 'constrained',
@@ -53,7 +53,7 @@ export default defineConfig({
 		icon({
 			// Only include the small set of Iconify mdi icons we need
 			include: {
-				   mdi: ['mastodon', 'linkedin', 'github', 'email', 'youtube', 'account', 'calendar', 'calendar-outline', 'account-outline', 'weather-sunny', 'weather-night', 'arrow-left'],
+				   mdi: ['mastodon', 'linkedin', 'github', 'email', 'youtube', 'account', 'calendar', 'calendar-outline', 'account-outline', 'weather-sunny', 'weather-night', 'arrow-left', 'arrow-right', 'clock-outline'],
 			},
 		}),
 	],

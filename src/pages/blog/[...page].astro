@@ -1,0 +1,46 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Pagination from '../../components/Pagination.astro';
+import PostCard from '../../components/PostCard.astro';
+import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getSortedPosts } from '../../utils/posts';
+import '../../styles/pages/blog-index.css';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const posts = await getSortedPosts();
+	return paginate(posts, { pageSize: POSTS_PER_PAGE });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title=`Blog - ${SITE_TITLE}` description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<section>
+				<div class="blog-header">
+					<h1>Blog</h1>
+					<p class="subtitle">Learnings, thoughts, and more.</p>
+					<a href="/tags" class="tags-link">Browse all tags →</a>
+				</div>
+				<ul class="post-list">
+					{
+						page.data.map((post, idx) => (
+							<PostCard post={post} loading={idx < 2 ? 'eager' : 'lazy'} tagLimit={5} />
+						))
+					}
+				</ul>
+				<Pagination page={page} />
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

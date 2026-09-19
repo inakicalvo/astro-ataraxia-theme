@@ -23,6 +23,8 @@
 	--text-color: rgb(var(--gray-dark));
 	--bg-color: #fff;
 	--code-bg: rgb(var(--gray-light));
+	--heading-color: rgb(var(--black));
+	--footer-text: rgb(var(--gray));
 }
 
 /* Dark theme variables */
@@ -45,6 +47,8 @@
 	--text-color: rgb(var(--gray-dark));
 	--bg-color: #111111;
 	--code-bg: rgb(var(--gray-light));
+	--heading-color: rgb(var(--black));
+	--footer-text: rgb(var(--gray));
 }
 body {
 	font-family: var(--font-atkinson), sans-serif;

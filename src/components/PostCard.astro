@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { SITE_AUTHOR } from '../consts';
+import { calculateReadingTime } from '../utils/readingTime';
+import FormattedDate from './FormattedDate.astro';
+import MetaItem from './MetaItem.astro';
+import PostMeta from './PostMeta.astro';
+import TagList from './TagList.astro';
+import '../styles/components/post-card.css';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+	loading?: 'eager' | 'lazy';
+	tagLimit?: number;
+}
+
+const { post, loading = 'lazy', tagLimit } = Astro.props;
+const isDraft = import.meta.env.DEV && post.data.draft;
+const readingTime = calculateReadingTime(post.body ?? '');
+---
+
+<li class="post-card">
+	<!-- The tag list sits outside the link: nesting <a> inside <a> is invalid HTML. -->
+	<a class="post-card-link" href={`/blog/${post.id}/`} aria-label={post.data.title}>
+		{post.data.heroImage && (
+			<Image
+				width={720}
+				height={360}
+				src={post.data.heroImage}
+				alt={post.data.heroImageAlt || ''}
+				loading={loading}
+			/>
+		)}
+		<div class="post-card-body">
+			<PostMeta>
+				<MetaItem icon="mdi:calendar">
+					<FormattedDate date={post.data.pubDate} />
+				</MetaItem>
+				<MetaItem icon="mdi:account">
+					{SITE_AUTHOR}
+				</MetaItem>
+				<MetaItem icon="mdi:clock-outline">
+					{readingTime} min read
+				</MetaItem>
+			</PostMeta>
+			<hr aria-hidden="true" />
+			<h2 class="post-card-title">
+				{post.data.title}
+				{isDraft && <span class="post-card-draft-badge">Draft</span>}
+			</h2>
+			{post.data.description && (
+				<p class="post-card-description">{post.data.description}</p>
+			)}
+			<hr aria-hidden="true" />
+		</div>
+	</a>
+	<div class="post-card-tags">
+		<TagList tags={post.data.tags} limit={tagLimit} />
+	</div>
+</li>
